@@ -1,0 +1,76 @@
+.checkout {
+    @apply px-4;
+    .container-fluid {
+        @apply px-0 grid grid-cols-1 md:grid-cols-4;
+        .cart {
+            @apply md:col-span-3 text-gray-400 relative;
+            .back{
+                @apply absolute top-7 left-12  w-7 h-7 flex items-center justify-center rounded-full border border-lime-200 text-lime-200 hover:border-gray-700  hover:bg-lime-600 hover:text-gray-700;
+            }
+            h2 {
+                @apply text-gray-700 text-3xl flex items-center mb-6 justify-center;
+                svg {
+                    @apply w-8 h-8 mr-2;
+                }
+            }
+
+            & > div {
+                @apply mt-1 p-4 shadow-md bg-gray-800 rounded-lg p-4 ;
+            }
+
+            .items {
+                .item {
+                    @apply p-1 flex items-center relative;
+                    &>div:first-child {
+                        @apply flex-grow flex text-4xl;
+                    }
+
+                    img {
+                        @apply w-20 h-20 rounded overflow-hidden relative z-10 shadow-md;
+                        object-fit: cover;
+                    }
+
+                    h4 {
+                        @apply flex items-center bg-gray-800 relative z-10 pr-4;
+                    }
+
+                    .subTotal{
+                        @apply relative flex items-center bg-gray-800 z-10 px-6 ml-auto -mr-2 text-3xl;
+                    }
+                    .ligature{
+                        @apply absolute w-full block border-t border-4 bottom-[40%] border-gray-600 border-dotted z-0;
+                    }
+                }
+            }
+
+            .total {
+                @apply flex justify-end text-4xl font-bold border-gray-700 border-t mt-3 pt-3 drop-shadow-lg;
+                .money {
+                    @apply font-mono inline-block ml-6;
+                }
+            }
+        }
+
+        .payment {
+            @apply px-1 ;
+            & > div {
+                @apply p-0 mt-1 mx-auto shadow-md bg-gray-800 rounded-lg md:w-[300px];
+            }
+
+            h2 {
+                @apply text-red-700 text-3xl flex items-center mb-6 justify-center pt-4;
+                svg {
+                    @apply w-8 h-8 mr-2;
+                }
+            }
+
+            .unavaillable {
+                @apply block mx-auto grayscale-[70%];
+                width: 300px;
+                max-width: 100%;
+            }
+        }
+    }
+
+
+}
