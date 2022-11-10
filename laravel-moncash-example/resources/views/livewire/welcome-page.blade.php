@@ -5,7 +5,7 @@
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">
                     Test the MonCash payment Flow</h1>
 
-                <img src="{{asset('img/MOnCashLaravelExample.png')}}" alt="MonCash Laravel Example" style="width: 200px"
+                <img src="{{ asset('img/MOnCashLaravelExample.jpg') }}" alt="MonCash Laravel Example" style="width: 200px"
                      class="border mx-auto border-0 mb-2">
                 <p class="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-gray-400">
                     From checkout to payment, test the flow using MonCash on Laravel. Use this to help integrate the
@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{asset('img/fruitsBasket.png')}}" alt="basket">
+                <img src="{{asset('img/fruitsBasket.jpg')}}" alt="basket">
             </div>
         </div>
     </section>

@@ -1,6 +1,4 @@
 
-[
-+laravel-moncash-example/config/database.php,c\f\cf7e72430b79e67d9dad9a836ab3df6c40df3b9a
 T
 $laravel-moncash-example/.env.example,d\d\dd558a6208b9bb8347029ad63671e826173e56b4
 W
@@ -13,10 +11,6 @@ a
 1laravel-moncash-example/resources/js/bootstrap.js,8\8\88e5c461d0acf92e863998ebe98bfeca385e2b77
 [
 +laravel-moncash-example/resources/js/app.js,1\d\1dce16c6585b88bb88959ec139b15a8195b8cdcc
-U
-%laravel-moncash-example/composer.json,c\8\c852d7fac1b1bc442890035c6b76c12fd709bae6
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 o
 ?laravel-moncash-example/resources/views/livewire/cart.blade.php,1\4\147497463d16199c070b184bc1f200dc77cfabe3
 V
@@ -27,7 +21,5 @@ i
 9laravel-moncash-example/app/Http/Livewire/SuccessPage.php,d\c\dca1ffc0b96bba302c55a31420a05d6c96cce3ab
 i
 9laravel-moncash-example/app/Http/Livewire/HistoryPage.php,3\0\306ccd2eff01ed10a35e818463ec9d55e0b51877
-f
-6laravel-moncash-example/app/Http/Livewire/CartPage.php,a\6\a6911d449ec109e49c76a415144edb4aad522cb1
 b
 2laravel-moncash-example/app/Http/Livewire/Cart.php,c\4\c42afd4ca1bf7fbcba4a1248bbe775fe2360e9dc

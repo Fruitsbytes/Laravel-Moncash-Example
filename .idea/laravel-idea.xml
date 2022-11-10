@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LaravelIdeaMainSettings">
+    <option name="bladeComponentViewsDirectory" value="resources/views/" />
+    <option name="codeGeneration">
+      <LaravelCodeGeneration>
+        <option name="addPhpDocs" value="true" />
+        <option name="preferredQuote" value="&quot;" />
+      </LaravelCodeGeneration>
+    </option>
+  </component>
+</project>

@@ -16,13 +16,38 @@ This example focuses on the
 gh repo clone Fruitsbytes/Laravel-Moncash-Example
 ```
 
-2) Start Docker from inside the example directory
+2) Install the packages
+```shell
+php composer install
+```
+or using [Laravel Sail + Docker](https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
 
 ```shell
-cd laravel-moncash-example && ./vendor/bin/sail up
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
 ```
 
-3) Add the credentials to the `.env` file or diretcly in the `./config/moncash.php` _(⚠ unsafe)_ file.
+
+
+Note: Some extensions are required for specific strategies but you can switch strategies in the `config/moncash.php
+`file.
+
+3) Migrate the database (Make sur the configurations OK)
+```shell
+php artisan migrate
+```
+or if you are using Docker
+
+```shell
+sail artisan migrate
+```
+
+
+4) Add the credentials to the `.env` file or diretcly in the `./config/moncash.php` _(⚠ unsafe)_ file.
 
 By default the demo site will be available in http://localhost/
 
@@ -42,20 +67,47 @@ In the
 #### Return Url
 
 MonCash server will signal your server directly to that URL
-> example : http://localhost/secure/success
+> example : http://localhost/api/notify
 
-It is very important that you put MonCash IP/DomainName in the Allowlist/Acceptlist/Whitelist of the server for that
-specific endpoint.
+In production a good pratice would be that you put MonCash IP/DomainName in the Allowlist (Acceptlist or Whitelist) of the server for that
+specific endpoint. 
 
-Get the transactionId to have the status of the payment for the provided orderID.
+To illustrate that this is not a connection initiated by you to the MonCash server we put it in the `/api` routes. It can be a different server that is specifically tailored to fulfill the transaction, differebt than the one used to display the products. 
 
-On a local server, you can use [Ngrok](https://dashboard.ngrok.com/get-started/setup) to tunnel
+
+On a local server, you can use [Ngrok](https://dashboard.ngrok.com/get-started/setup) to tunnel or `sail share` if you are using [Laravel Sail](https://laravel.com/docs/9.x/sail#sharing-your-site)
 
 #### Alert Url
 
 After the transaction is finished, the transactionId is appended to the URL so you can check the value
-> result : http://localhost/payment/success?transactionId=2185608546
+> result : http://localhost/success?transactionId=2185608546
 
+NOTE: If you share Your local server via a proxie or use an online instance, make sure to configure the Business in the MonCash admin portal accordingly
+
+<p align="center">
+<img width="400" src="./assets/images/ngrpk%20Moncash.png?v=2" alt="Ngrok example">
+</p>
+
+## Pick a Strategy
+We proposed several service providers to handle the business logic.
+
+###   Authentication
+If we can cache yje token andd re-use it until it expires this will reduce the nuber of new token requests we make to the API.
+- Redis (recommended)
+- 🚧  MySQL
+- HTTP (default / fallback)
+
+### Payment log
+Store the Payment for later use, example: Approve the delivery pf the products after the payment is verified as successful, or use this information for accounting reports.
+- Redis (fast)
+- MySQL (default/fallback)
+- 🚧 File (Slow, needs permission)
+
+### OrderID
+Get a uniq orderID that we can use to reference the transaction later, especially if we don' t have a transactionID yet to link to the cirrent order.  
+- UUID (low risk of collision)
+- 🚧 MySQL (No collision but slow. The toll increases in distributed infrastructure )
+- Random Uniq ID (Not too reliable, expecially with distributed infrastructure )
 
 ## Security
 
