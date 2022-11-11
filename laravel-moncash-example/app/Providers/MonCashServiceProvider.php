@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Facades\MonCash\HTTP;
+use App\Services\MonCash\APIService;
+use App\Services\MonCash\AuthCachedService;
 use App\Services\MonCash\AuthService;
 use App\Services\MonCash\HTTPService;
+use App\Services\MonCash\OrderIdService;
+use App\Services\MonCash\OrderIdUUIDService;
 use Illuminate\Support\ServiceProvider;
 
 class MonCashServiceProvider extends ServiceProvider
@@ -15,11 +20,20 @@ class MonCashServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(HTTPService::class, function (){
+        $this->app->singleton(HTTPService::class, function () {
             return new HTTPService();
         });
-        $this->app->singleton(AuthService::class, function (){
-            return new AuthService();
+
+        $this->app->singleton(APIService::class, function () {
+            return new APIService(new HTTP());
+        });
+
+        $this->app->singleton(AuthService::class, function () {
+            return new AuthService(new HTTP());
+        });
+
+        $this->app->bind(OrderIdService::class, function () {
+            return new OrderIdUUIDService();
         });
     }
 

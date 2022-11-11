@@ -44,4 +44,8 @@ use Illuminate\Support\Carbon;
 class Payment extends Model
 {
     use HasFactory;
+
+    protected $casts= [
+        'cart'=> 'array'
+    ];
 }

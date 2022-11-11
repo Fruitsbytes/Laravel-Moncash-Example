@@ -117,9 +117,9 @@
             }
 
             .loading {
-                @apply absolute backdrop-blur-sm bg-gray-900/80 top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center text-orange-200 text-2xl;
+                @apply absolute backdrop-blur-sm bg-gray-900/80 top-0 bottom-0 left-0 right-0 flex-col justify-center items-center text-orange-200 text-2xl;
                 svg {
-                    @apply mx-auto block w-8 h-8 animate-spin text-gray-600 fill-orange-500
+                    @apply mx-auto block w-12 h-12 animate-spin text-gray-600 fill-orange-500
                 }
             }
 
@@ -149,5 +149,26 @@
         }
     }
 
-
+    .emptyCart{
+        @apply flex flex-col  justify-center items-center text-gray-500 border border-b-0 border-gray-700 shadow-md bg-gray-800 mx-auto rounded-t;
+        width: 300px;
+        svg{
+            @apply  block text-yellow-400 opacity-60 w-40 h-40;
+            width: 256px;
+            transform: rotateZ(45deg);
+        }
+        p{
+            @apply text-sm text-gray-600 mb-5 mx-4 mt-2;
+            a{
+                @apply text-red-600 underline;
+            }
+            span{
+                @apply inline-block opacity-25 hover:opacity-100 cursor-grab p-1 rounded-full even:hover:bg-rose-600 odd:hover:bg-green-400 hover:scale-150;
+                transition: all .4s .2s ease-in-out;
+            }
+        }
+        h3{
+            @apply text-4xl;
+        }
+    }
 }

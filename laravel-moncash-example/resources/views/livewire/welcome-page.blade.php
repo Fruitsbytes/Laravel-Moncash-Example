@@ -11,7 +11,7 @@
                     From checkout to payment, test the flow using MonCash on Laravel. Use this to help integrate the
                     REST API into your Laravel applications.</p>
                 <a href="{{route('store')}}"
-                   class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:ring-lime-300 focus:ring-lime-800">
+                   class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300 focus:ring-orange-800">
                     Get started
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
@@ -20,9 +20,9 @@
                               clip-rule="evenodd"></path>
                     </svg>
                 </a>
-                <a href="{{route('history')}}"
-                   class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center  border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800">
-                    View history
+                <a href="{{route('orders')}}"
+                   class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center  border  rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800">
+                    View Orders
                 </a>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">

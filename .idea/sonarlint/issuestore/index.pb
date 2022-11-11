@@ -1,8 +1,4 @@
 
-T
-$laravel-moncash-example/.env.example,d\d\dd558a6208b9bb8347029ad63671e826173e56b4
-W
-'laravel-moncash-example/config/auth.php,4\e\4e2d4808b69f35111138c2ffd52d4f318c3a51c1
 p
 @laravel-moncash-example/resources/views/layouts/footer.blade.php,c\4\c4a93b53588be950fdcd0fcf8ac77ec75f690787
 Z
@@ -13,10 +9,6 @@ a
 +laravel-moncash-example/resources/js/app.js,1\d\1dce16c6585b88bb88959ec139b15a8195b8cdcc
 o
 ?laravel-moncash-example/resources/views/livewire/cart.blade.php,1\4\147497463d16199c070b184bc1f200dc77cfabe3
-V
-&laravel-moncash-example/vite.config.js,5\f\5fcdf94aea52ef3052d1ad3341a9a572f85cc8ac
-o
-?laravel-moncash-example/resources/views/layouts/index.blade.php,8\0\8049f8bcd4a3b3a813da2ced57e8155ee95a37ca
 i
 9laravel-moncash-example/app/Http/Livewire/SuccessPage.php,d\c\dca1ffc0b96bba302c55a31420a05d6c96cce3ab
 i

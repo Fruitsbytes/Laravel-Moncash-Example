@@ -1,10 +1,14 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/*', 'resources/js/*'],
+            input: [
+                'resources/css/app.scss',
+                'resources/css/cart-page.scss',
+                'resources/css/header.scss',
+                'resources/js/app.js'],
             refresh: true,
         }),
     ],

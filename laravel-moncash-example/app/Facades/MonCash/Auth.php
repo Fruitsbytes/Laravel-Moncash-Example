@@ -3,16 +3,15 @@
 namespace App\Facades\MonCash;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
-use MonCashAPIClient;
+
 
 /**
- * @property MonCashAPIClient $client
- * @method  string getToken()
+ * @method static string getClientSecret()
+ * @method static string getClientId()
+ * @method static string getToken()
  */
 class Auth
 {
-
-
     /**
      * @param  string  $name
      * @param  array  $arguments

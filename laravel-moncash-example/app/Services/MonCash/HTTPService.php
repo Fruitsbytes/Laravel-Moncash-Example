@@ -19,10 +19,9 @@ class HTTPService
 
     public string $host;
 
-    private Auth $auth;
 
     #[ExpectedValues(['sandbox', 'production'])]
-    public string $mode;
+    private string $mode;
 
     public function __construct()
     {
@@ -35,7 +34,6 @@ class HTTPService
         }
 
         $this->host = self::HOST_REST_API[$mode];
-        $this->auth = new Auth();
     }
 
     /**
@@ -50,8 +48,7 @@ class HTTPService
         array $params,
         #[ExpectedValues(['Basic', 'Bearer', null])]
         string|null $auth = "Bearer"
-    ): Response
-    {
+    ): Response {
         return $this->appendAuth($auth)->get($this->endpointToURL($endpoint), $params);
     }
 
@@ -67,8 +64,7 @@ class HTTPService
         array $params,
         #[ExpectedValues(['Basic', 'Bearer', null])]
         string|null $auth = "Bearer"
-    ): PromiseInterface|Response
-    {
+    ): PromiseInterface|Response {
         return $this->appendAuth($auth)->asForm()->post($this->endpointToURL($endpoint), $params);
     }
 
@@ -78,14 +74,15 @@ class HTTPService
      * @param  string  $contentType
      * @param  string|null  $auth
      *
-     * @return PromiseInterface|Response
+     * @return Response
      */
     public function postRaw(
         string $endpoint,
         mixed $rawData,
         string $contentType = 'application/json',
         #[ExpectedValues(['Basic', 'Bearer', null])]
-        string|null $auth = "Bearer"): PromiseInterface|Response {
+        string|null $auth = "Bearer"
+    ): Response {
         return $this->appendAuth($auth)->withBody($rawData, $contentType)->post($this->endpointToURL($endpoint));
     }
 
@@ -93,16 +90,16 @@ class HTTPService
      * @param  string  $endpoint
      * @param  mixed  $rawData
      *
-     * @return PromiseInterface|Response
+     * @return Response
      */
-    public function postJson(string $endpoint, mixed $rawData): PromiseInterface|Response
+    public function postJson(string $endpoint, mixed $rawData): Response
     {
         return $this->postRaw($endpoint, $rawData);
     }
 
-    public function endpointToURL(string $endpoint): string
+    private function endpointToURL(string $endpoint): string
     {
-        return $this->host."/$endpoint";
+        return $this->host."$endpoint";
     }
 
     /**
@@ -110,16 +107,23 @@ class HTTPService
      *
      * @return PendingRequest
      */
-    public function appendAuth(
+    private function appendAuth(
         #[ExpectedValues(['Basic', 'Bearer', null])]
         string|null $type
     ): PendingRequest {
 
-        return match ($type) {
-            'Basic' => Http::withBasicAuth($this->auth->client->id, config($this->auth->client->secret)),
-            'Bearer' => Http::withToken($this->auth->getToken()),
+        $h = match ($type) {
+            'Basic' => Http::withBasicAuth(Auth::getClientId(), Auth::getClientSecret() ),
+            'Bearer' => Http::withToken(Auth::getToken()),
             default => Http::withToken(''),
         };
 
+        return $h->withHeaders(['Accept' => 'application/json']);
+
+    }
+
+    public function getMode():string
+    {
+        return $this->mode;
     }
 }
