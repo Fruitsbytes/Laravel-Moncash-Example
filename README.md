@@ -1,3 +1,5 @@
+
+
 # Laravel-Moncash-Example
 
 <p align="center">
@@ -50,6 +52,19 @@ sail artisan migrate
 4) Add the credentials to the `.env` file or diretcly in the `./config/moncash.php` _(⚠ unsafe)_ file.
 
 By default the demo site will be available in http://localhost/
+
+
+<table>
+<tr>
+<td><img src="./assets/images/demo1.jpg?v=1" alt="demo1"></td>
+<td><img src="./assets/images/demo2.jpg?v=1" alt="demo1"></td>
+</tr>
+<tr>
+<td><img src="./assets/images/demo3.jpg?v=1" alt="demo1"></td>
+<td><img src="./assets/images/demo4.jpg?v=1" alt="demo1"></td>
+</tr>
+</table>
+
 
 ## Usage
 
