@@ -120,7 +120,7 @@ return [
     */
 
     'redis' => [
-
+        // Use predis if phpredis is not available, https://laravel.com/docs/9.x/redis
         'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [

@@ -3,6 +3,8 @@
 use App\Http\Livewire\BuyPage;
 use App\Http\Livewire\CartPage;
 use App\Http\Livewire\HistoryPage;
+use App\Http\Livewire\Scratch;
+use App\Http\Livewire\SettingsPage;
 use App\Http\Livewire\SuccessPage;
 use App\Http\Livewire\WelcomePage;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomePage::class)->name('welcome');
-Route::get('/history', HistoryPage::class)->name('history');
+Route::get('/orders', HistoryPage::class)->name('orders');
 Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/success', SuccessPage::class)->name('success');
 Route::get('/store', BuyPage::class)->name('store');
+Route::get('/settings', SettingsPage::class)->name('settings');
+Route::get('/scratch', Scratch::class)->name('scratch');

@@ -1,12 +1,13 @@
 .checkout {
     @apply px-4;
     .container-fluid {
-        @apply px-0 grid grid-cols-1 md:grid-cols-4;
+        @apply px-0 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4;
         .cart {
-            @apply md:col-span-3 text-gray-400 relative;
-            .back{
+            @apply col-span-1 md:col-span-2 lg:col-span-3 text-gray-400 relative;
+            .back {
                 @apply absolute top-7 left-12  w-7 h-7 flex items-center justify-center rounded-full border border-lime-200 text-lime-200 hover:border-gray-700  hover:bg-lime-600 hover:text-gray-700;
             }
+
             h2 {
                 @apply text-gray-700 text-3xl flex items-center mb-6 justify-center;
                 svg {
@@ -19,14 +20,26 @@
             }
 
             .items {
+                margin-bottom: 0;
+
                 .item {
-                    @apply p-1 flex items-center relative;
-                    &>div:first-child {
+                    &:first-of-type {
+                        @apply rounded-t-lg;
+                    }
+
+                    &:last-of-type {
+                        @apply border-b-0;
+                    }
+
+                    @apply p-1 flex items-center relative mx-auto border border-gray-700 shadow-md bg-gray-800;
+                    max-width: 700px;
+
+                    & > div:first-child {
                         @apply flex-grow flex text-4xl;
                     }
 
                     img {
-                        @apply w-20 h-20 rounded overflow-hidden relative z-10 shadow-md;
+                        @apply w-20 h-20 rounded overflow-hidden relative z-10 shadow-md my-2 ml-2;
                         object-fit: cover;
                     }
 
@@ -34,43 +47,128 @@
                         @apply flex items-center bg-gray-800 relative z-10 pr-4;
                     }
 
-                    .subTotal{
-                        @apply relative flex items-center bg-gray-800 z-10 px-6 ml-auto -mr-2 text-3xl;
+                    .subTotal {
+                        @apply relative flex items-center bg-gray-800 z-10 px-3 ml-auto text-lg;
                     }
-                    .ligature{
-                        @apply absolute w-full block border-t border-4 bottom-[40%] border-gray-600 border-dotted z-0;
+
+                    .ligature {
+                        @apply absolute w-[90%] ml-4 block border-t-2  bottom-[45%] border-gray-600 border-dotted z-0 p-0;
                     }
                 }
             }
 
             .total {
-                @apply flex justify-end text-4xl font-bold border-gray-700 border-t mt-3 pt-3 drop-shadow-lg;
+                @apply flex justify-end text-xl font-bold border-gray-700 border-t mt-0 pt-4 drop-shadow-lg;
                 .money {
                     @apply font-mono inline-block ml-6;
+                }
+
+                & > div {
+                    @apply mx-auto w-full text-right pr-4;
+                    max-width: 700px;
                 }
             }
         }
 
         .payment {
-            @apply px-1 ;
+            @apply px-1 relative overflow-hidden;
             & > div {
-                @apply p-0 mt-1 mx-auto shadow-md bg-gray-800 rounded-lg md:w-[300px];
+                @apply p-0 mt-1 pt-5 relative overflow-hidden mx-auto shadow-md bg-gray-800 rounded-lg md:w-[300px];
             }
 
             h2 {
-                @apply text-red-700 text-3xl flex items-center mb-6 justify-center pt-4;
+                @apply absolute -top-5 left-1 text-gray-900;
                 svg {
-                    @apply w-8 h-8 mr-2;
+                    @apply block;
+                    width: 200px;
+                    height: 200px;
+                    margin-left: -90px;
                 }
             }
 
-            .unavaillable {
-                @apply block mx-auto grayscale-[70%];
-                width: 300px;
+            .unavailable {
+                @apply block mx-auto cursor-not-allowed;
+                width: 270px;
                 max-width: 100%;
+            }
+
+            .moncash {
+                @apply flex justify-center p-5 rounded-lg items-center text-center flex-col mt-3;
+                img {
+                    @apply block cursor-pointer;
+                    width: 250px;
+                    transition: .3s ease-in;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+
+            .terms {
+                @apply p-4 text-gray-400 text-sm mb-6;
+                small {
+                    @apply text-gray-600
+                }
+
+                a {
+                    @apply underline text-red-600;
+                }
+            }
+
+            .loading {
+                @apply absolute backdrop-blur-sm bg-gray-900/80 top-0 bottom-0 left-0 right-0 flex-col justify-center items-center text-orange-200 text-2xl;
+                svg {
+                    @apply mx-auto block w-12 h-12 animate-spin text-gray-600 fill-orange-500
+                }
+            }
+
+            .plusFees {
+                @apply ml-auto text-xl text-gray-300 mr-4;
+                small{
+                    @apply text-sm text-gray-500;
+                }
+                td {
+                    text-align: center;
+                    vertical-align: bottom;
+                    &:first-child{
+                        @apply text-4xl text-gray-500 align-bottom;
+                    }
+                }
+
+                td + td {
+                    text-align: right;
+                }
+                tr:last-child{
+                    @apply border-t border-gray-500;
+                   td{
+                       @apply text-gray-50 text-3xl;
+                   }
+                }
             }
         }
     }
 
-
+    .emptyCart{
+        @apply flex flex-col  justify-center items-center text-gray-500 border border-b-0 border-gray-700 shadow-md bg-gray-800 mx-auto rounded-t;
+        width: 300px;
+        svg{
+            @apply  block text-yellow-400 opacity-60 w-40 h-40;
+            width: 256px;
+            transform: rotateZ(45deg);
+        }
+        p{
+            @apply text-sm text-gray-600 mb-5 mx-4 mt-2;
+            a{
+                @apply text-red-600 underline;
+            }
+            span{
+                @apply inline-block opacity-25 hover:opacity-100 cursor-grab p-1 rounded-full even:hover:bg-rose-600 odd:hover:bg-green-400 hover:scale-150;
+                transition: all .4s .2s ease-in-out;
+            }
+        }
+        h3{
+            @apply text-4xl;
+        }
+    }
 }

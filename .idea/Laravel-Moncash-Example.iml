@@ -118,6 +118,21 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/barryvdh/laravel-ide-helper" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/barryvdh/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/phpseclib/bcmath_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/phpseclib/phpseclib" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/jetbrains/phpstorm-attributes" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

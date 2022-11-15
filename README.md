@@ -1,30 +1,91 @@
 # Laravel-Moncash-Example
+<small>(Online Business)</small>  
+
+[en]: ./README.md "English translation"
+
+[fr]: ./README.fr.md "Traduction française"
+
+[ht]: ./README.ht.md "TRadiksyon kreyòl"
+
+🌎 i18n:  [`🇺🇸`][en] • [🇫🇷][fr] • [🇭🇹][ht]
 
 <p align="center">
     <img src="./banner.png?v=1" alt="banner">
 </p>
 
-An example on how to integrate the base MonCash Rest API in your Laravel project without any 3rd party package.
+Here you will find alist of examples on how to integrate the base MonCash Rest API in your Laravel project without any SDK.
 
-This example focuses on the
+Available examples for an __online__ business:
+- [Advanced](./laravel-moncash-example), Using Facades + Service Providers +  Strategies + i18n + Cart + Checkout
+- [Basic](./laravel-moncash-basic-example), One page + Fixed prices 
+
+Available examples for onsite experience :
+- 🚧 [Advanced](./laravel-moncash-onsite-example), CashIn + POS / Cashier dashboard with QR code Scanner
+- 🚧 [Basic](./laravel-moncash-onsite-basic-example), CashOut 
+
+## How to
+You can find a guide on how to make your own implementation from scratch here: [How To](./How%20To/README.md)
 
 ## Installation
 
-1) Clone the package
+1) Clone the repository
 
 ```shell
 gh repo clone Fruitsbytes/Laravel-Moncash-Example
 ```
 
-2) Start Docker from inside the example directory
-
+2) Navigate to the example you want to run:
 ```shell
-cd laravel-moncash-example && ./vendor/bin/sail up
+cd ./laravel-moncash-example
 ```
 
-3) Add the credentials to the `.env` file or diretcly in the `./config/moncash.php` _(⚠ unsafe)_ file.
+3) Install the packages
+```shell
+php composer install
+```
+or using [Laravel Sail + Docker](https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
+
+```shell
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+
+
+Note: Some extensions are required for specific strategies but you can switch strategies in the `config/moncash.php
+`file.
+
+4) Migrate the database (make sure the configurations is OK)
+```shell
+php artisan migrate
+```
+or if you are using Docker
+
+```shell
+sail artisan migrate
+```
+
+
+4) Add the credentials to the `.env` file or diretcly in the `./config/moncash.php` _(⚠ unsafe)_ file.
 
 By default the demo site will be available in http://localhost/
+
+
+<table>
+<tr>
+<td><img src="./assets/images/demo1.jpg?v=1" alt="demo1"></td>
+<td><img src="./assets/images/demo2.jpg?v=1" alt="demo1"></td>
+</tr>
+<tr>
+<td><img src="./assets/images/demo3.jpg?v=1" alt="demo1"></td>
+<td><img src="./assets/images/demo4.jpg?v=1" alt="demo1"></td>
+</tr>
+</table>
+
 
 ## Usage
 
@@ -35,27 +96,64 @@ You will need a valid test phone number or you will not be able to go through wi
 
 You can use Ngrok to tunnel server responses
 
-### Create a Business
+### Setup a Business
 
-In the
+In the MonCadh portal, create a new __online__ business and get the credentals. You will also need to stup the Return URL + Alert URL
 
 #### Return Url
 
 MonCash server will signal your server directly to that URL
-> example : http://localhost/secure/success
+> example : http://localhost/api/notify
 
-It is very important that you put MonCash IP/DomainName in the Allowlist/Acceptlist/Whitelist of the server for that
-specific endpoint.
+In production, a good pratice would be that you put MonCash IP/DomainName in the Allowlist (Acceptlist or Whitelist) of the server for that
+specific endpoint. 
 
-Get the transactionId to have the status of the payment for the provided orderID.
+To illustrate that this is not a connection initiated by you to the MonCash server, we put it in the `/api` routes. 
 
-On a local server, you can use [Ngrok](https://dashboard.ngrok.com/get-started/setup) to tunnel
+In a real world application, It can be a different server that is specifically tailored to fulfill the transaction, working in sync with the one used to display the products. 
+
+
+On a local server, you can use [Ngrok](https://dashboard.ngrok.com/get-started/setup) to tunnel or `sail share` if you are using [Laravel Sail](https://laravel.com/docs/9.x/sail#sharing-your-site)
 
 #### Alert Url
 
 After the transaction is finished, the transactionId is appended to the URL so you can check the value
-> result : http://localhost/payment/success?transactionId=2185608546
+> result : http://localhost/success?transactionId=2185608546
 
+NOTE: If you share Your local server via a proxie or use an online instance, make sure to configure the Business in the MonCash admin portal accordingly
+
+<p align="center">
+<img width="400" src="./assets/images/ngrpk%20Moncash.png?v=2" alt="Ngrok example">
+</p>
+
+## General concept
+We proposed several service providers to handle the business logic.
+
+###   Authentication + Cache
+If we can cache the token and re-use it until it expires this will reduce the number of new token requests we make to the API. 
+
+Configure the cache in the `config/cache.php`
+- Redis (default)
+- MySQL
+- File
+- MemCache
+- No Cache , pure HTTP (fallback)
+- ...
+
+
+### Payment log
+Store the Payment for later use, example: Approve the delivery of the products after the payment is verified as successful, or use this information for accounting reports.
+
+Configure the Database connection for the Payment Model.
+- Redis (fast)
+- MySQL (default)
+- File (Slow, needs permission)
+
+### OrderID (Reference Id)
+Get a uniq orderID that we can use to reference the transaction later, especially if we don' t have a transactionID yet to link to the cirrent order.  
+- UUID (low risk of collision)
+- 🚧 MySQL (No collision but slow. The toll increases in distributed infrastructure )
+- Random Uniq ID (Not too reliable, expecially with distributed infrastructure )
 
 ## Security
 
@@ -94,3 +192,7 @@ You can also check our <a href="https://www.youtube.com/channel/UC14dR51q2_mFCQu
 
 This project is available under [MIT](https://github.com/Fruitsbytes/Laravel-Moncash-Example/blob/main/LICENSE) license.
 
+
+<p>
+<img src="./assets/images/footer.png?v=2" alt="" width="300">
+</p>
