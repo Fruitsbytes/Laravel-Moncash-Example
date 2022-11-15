@@ -8,5 +8,10 @@
         <option name="preferredQuote" value="&quot;" />
       </LaravelCodeGeneration>
     </option>
+    <option name="enabledCheckType" value="manual" />
+    <option name="frameworkFound" value="true" />
+    <option name="laravelBasePath" value="laravel-moncash-example" />
+    <option name="manualEnabled" value="true" />
+    <option name="searchEloquentUsages" value="true" />
   </component>
 </project>

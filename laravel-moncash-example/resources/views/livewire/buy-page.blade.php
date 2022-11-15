@@ -67,7 +67,7 @@ $fmt = new NumberFormatter('en_EN', NumberFormatter::CURRENCY);
                     <tr class="border-b border-red-900">
                         <td class=" py-3">Total</td>
                         <td class=" py-3" style="min-width: 100px; text-align: end; padding-left: 12px">
-                            {{$fmt->formatCurrency($total, 'USD')}}
+                            {{$fmt->formatCurrency($total, 'HTG')}}
                         </td>
                     </tr>
                     @if($total > 0)
@@ -125,7 +125,7 @@ $fmt = new NumberFormatter('en_EN', NumberFormatter::CURRENCY);
                         </a>
 
                         <span class="ml-8 font-mono block"
-                              style="font-size: 20px">{{ $fmt->formatCurrency($fruit['price'], 'USD') }}</span><sup>/lbs</sup>
+                              style="font-size: 20px">{{ $fmt->formatCurrency($fruit['price'], 'HTG') }}</span><sup>/lbs</sup>
                     </div>
                 </div>
 

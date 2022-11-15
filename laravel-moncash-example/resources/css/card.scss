@@ -1,0 +1,6 @@
+.card{
+    @apply bg-gray-900 py-2 px-6 border border-gray-800 rounded-lg m-2;
+    h3{
+        @apply mt-4 pt-4 border-t border-gray-700 mb-4 text-2xl
+    }
+}

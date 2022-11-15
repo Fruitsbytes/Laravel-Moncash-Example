@@ -1,0 +1,5 @@
+@livewireStyles
+
+@yield('content')
+
+@livewireScripts

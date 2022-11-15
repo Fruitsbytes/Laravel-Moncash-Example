@@ -1,0 +1,13 @@
+.container.orders{
+    max-width: 1000px;
+}
+
+.results{
+    @apply border border-gray-700 rounded-lg  mt-6;
+    .result{
+        @apply py-4 px-4;
+        & + .result{
+            @apply border-t border-gray-700
+        }
+    }
+}

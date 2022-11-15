@@ -2,10 +2,14 @@
 
 namespace App\Facades\MonCash;
 
+use App\Models\Payment;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * @method  static string createPayement(string $orderId, int $amount)
+ * @method  static Payment getOrder(string $orderId);
+ * @method  static Payment getTransaction(string $orderId);
+ *
  */
 class API
 {

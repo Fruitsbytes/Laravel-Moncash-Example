@@ -1,24 +1,45 @@
-
-
 # Laravel-Moncash-Example
+<small>(Online Business)</small>  
+
+[en]: ./README.md "English translation"
+
+[fr]: ./README.fr.md "Traduction française"
+
+[ht]: ./README.ht.md "TRadiksyon kreyòl"
+
+🌎 i18n:  [`🇺🇸`][en] • [🇫🇷][fr] • [🇭🇹][ht]
 
 <p align="center">
     <img src="./banner.png?v=1" alt="banner">
 </p>
 
-An example on how to integrate the base MonCash Rest API in your Laravel project without any 3rd party package.
+Here you will find alist of examples on how to integrate the base MonCash Rest API in your Laravel project without any SDK.
 
-This example focuses on the
+Available examples for an __online__ business:
+- [Advanced](./laravel-moncash-example), Using Facades + Service Providers +  Strategies + i18n + Cart + Checkout
+- [Basic](./laravel-moncash-basic-example), One page + Fixed prices 
+
+Available examples for onsite experience :
+- 🚧 [Advanced](./laravel-moncash-onsite-example), CashIn + POS / Cashier dashboard with QR code Scanner
+- 🚧 [Basic](./laravel-moncash-onsite-basic-example), CashOut 
+
+## How to
+You can find a guide on how to make your own implementation from scratch here: [How To](./How%20To/README.md)
 
 ## Installation
 
-1) Clone the package
+1) Clone the repository
 
 ```shell
 gh repo clone Fruitsbytes/Laravel-Moncash-Example
 ```
 
-2) Install the packages
+2) Navigate to the example you want to run:
+```shell
+cd ./laravel-moncash-example
+```
+
+3) Install the packages
 ```shell
 php composer install
 ```
@@ -38,7 +59,7 @@ docker run --rm \
 Note: Some extensions are required for specific strategies but you can switch strategies in the `config/moncash.php
 `file.
 
-3) Migrate the database (Make sur the configurations OK)
+4) Migrate the database (make sure the configurations is OK)
 ```shell
 php artisan migrate
 ```
@@ -75,19 +96,21 @@ You will need a valid test phone number or you will not be able to go through wi
 
 You can use Ngrok to tunnel server responses
 
-### Create a Business
+### Setup a Business
 
-In the
+In the MonCadh portal, create a new __online__ business and get the credentals. You will also need to stup the Return URL + Alert URL
 
 #### Return Url
 
 MonCash server will signal your server directly to that URL
 > example : http://localhost/api/notify
 
-In production a good pratice would be that you put MonCash IP/DomainName in the Allowlist (Acceptlist or Whitelist) of the server for that
+In production, a good pratice would be that you put MonCash IP/DomainName in the Allowlist (Acceptlist or Whitelist) of the server for that
 specific endpoint. 
 
-To illustrate that this is not a connection initiated by you to the MonCash server we put it in the `/api` routes. It can be a different server that is specifically tailored to fulfill the transaction, differebt than the one used to display the products. 
+To illustrate that this is not a connection initiated by you to the MonCash server, we put it in the `/api` routes. 
+
+In a real world application, It can be a different server that is specifically tailored to fulfill the transaction, working in sync with the one used to display the products. 
 
 
 On a local server, you can use [Ngrok](https://dashboard.ngrok.com/get-started/setup) to tunnel or `sail share` if you are using [Laravel Sail](https://laravel.com/docs/9.x/sail#sharing-your-site)
@@ -103,22 +126,30 @@ NOTE: If you share Your local server via a proxie or use an online instance, mak
 <img width="400" src="./assets/images/ngrpk%20Moncash.png?v=2" alt="Ngrok example">
 </p>
 
-## Pick a Strategy
+## General concept
 We proposed several service providers to handle the business logic.
 
-###   Authentication
-If we can cache yje token andd re-use it until it expires this will reduce the nuber of new token requests we make to the API.
-- Redis (recommended)
-- 🚧  MySQL
-- HTTP (default / fallback)
+###   Authentication + Cache
+If we can cache the token and re-use it until it expires this will reduce the number of new token requests we make to the API. 
+
+Configure the cache in the `config/cache.php`
+- Redis (default)
+- MySQL
+- File
+- MemCache
+- No Cache , pure HTTP (fallback)
+- ...
+
 
 ### Payment log
-Store the Payment for later use, example: Approve the delivery pf the products after the payment is verified as successful, or use this information for accounting reports.
-- Redis (fast)
-- MySQL (default/fallback)
-- 🚧 File (Slow, needs permission)
+Store the Payment for later use, example: Approve the delivery of the products after the payment is verified as successful, or use this information for accounting reports.
 
-### OrderID
+Configure the Database connection for the Payment Model.
+- Redis (fast)
+- MySQL (default)
+- File (Slow, needs permission)
+
+### OrderID (Reference Id)
 Get a uniq orderID that we can use to reference the transaction later, especially if we don' t have a transactionID yet to link to the cirrent order.  
 - UUID (low risk of collision)
 - 🚧 MySQL (No collision but slow. The toll increases in distributed infrastructure )
@@ -161,3 +192,7 @@ You can also check our <a href="https://www.youtube.com/channel/UC14dR51q2_mFCQu
 
 This project is available under [MIT](https://github.com/Fruitsbytes/Laravel-Moncash-Example/blob/main/LICENSE) license.
 
+
+<p>
+<img src="./assets/images/footer.png?v=2" alt="" width="300">
+</p>

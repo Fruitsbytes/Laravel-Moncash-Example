@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->json('cart');
             $table->string('orderID')->nullable();
             $table->string('transactionID')->nullable();
-            $table->dateTime('expiration')->nullable();
+            $table->timestamp('expiration')->nullable();
             $table->float('amount')->nullable();
             $table->float('cost')->nullable();
             $table->string('message', 100)->nullable();

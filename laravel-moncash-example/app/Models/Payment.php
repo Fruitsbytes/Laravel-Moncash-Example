@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Facades\MonCash\API;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +46,18 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $casts= [
-        'cart'=> 'array'
+    protected $casts = [
+        'cart' => 'array'
     ];
+
+    public function toUpdateArray(): array
+    {
+        return [
+            "orderID"       => $this->orderID,
+            "transactionID" => $this->transactionID,
+            "cost"          => $this->cost,
+            "payer"         => $this->payer,
+            "message"       => $this->message
+        ];
+    }
 }

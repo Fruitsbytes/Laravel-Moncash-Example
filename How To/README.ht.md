@@ -1,8 +1,19 @@
+# Eksplikasyon
+<small>(Biznis an liy)</small>
+
+[en]: ./README.md "English translation"
+
+[fr]: ./README.fr.md "Traduction française"
+
+[ht]: ./README.ht.md "TRadiksyon kreyòl"
+
+🌎 i18n:  [🇺🇸][en] • [🇫🇷][fr] • [`🇭🇹`][ht]
+
 <p align="center">
 <img src="../banner.png?v=1" alt="Laravel+Moncash">
 </p>
 
-# Eksplikasyon
+
 
 Nou pral eksplike kijan ou ka entegre MonCash nan on sit Laravel. Sit ou pral fè a li kapab on sit pou vann oswa resevwa
 don. Nou pral
@@ -12,6 +23,8 @@ la ou pou kominike ak API yo a.
 Majorite enteraksyon nou pral fè ak API a nou pral sèvi
 ak [Laravel\HTTP Client](https://laravel.com/docs/9.x/http-client) ou ka
 verifye [dokimantasyon](https://laravel.com/docs/9.x/http-client) an pou wè kijan pou sèvi ak li.
+
+Ou ap jwen on egzanp komplè ka ilizasyon senp nan sou-repètwa [laravel-moncash-basic-example](../laravel-moncash-basic-example)
 
 ## Boutton peye a
 
@@ -482,7 +495,11 @@ Egzanp rezilta:
 }
 ```
 
+## Lisans
+
+Pwojè sila a disponib sou lisans [MIT](https://github.com/Fruitsbytes/Laravel-Moncash-Example/blob/main/LICENSE).
+
+
 <p>
 <img src="../assets/images/footer.png?v=2" alt="" width="300">
-</p>
 

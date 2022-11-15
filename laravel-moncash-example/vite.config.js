@@ -7,8 +7,11 @@ export default defineConfig({
             input: [
                 'resources/css/app.scss',
                 'resources/css/cart-page.scss',
+                'resources/css/card.scss',
                 'resources/css/header.scss',
-                'resources/js/app.js'],
+                'paginated-results.scss',
+                'resources/js/app.js'
+            ],
             refresh: true,
         }),
     ],

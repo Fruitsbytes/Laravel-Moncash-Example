@@ -41,7 +41,7 @@
                                         <span class="ml-6 text-lg">{{$fruit['name']}}</span>
                                     </h4>
                                     <div class="subTotal">
-                                        {{$fmt->formatCurrency($fruit['number'] * $fruit['price'], 'USD')}}
+                                        {{$fmt->formatCurrency($fruit['number'] * $fruit['price'], 'HTG')}}
                                     </div>
                                     <div class="ligature"></div>
                                 </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="total">
                         <div>
-                            Sub-Total <span class="money">{{$fmt->formatCurrency($total, 'USD')}}</span>
+                            Sub-Total <span class="money">{{$fmt->formatCurrency($total, 'HTG')}}</span>
                         </div>
                     </div>
                 </div>
@@ -108,18 +108,18 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td> {{$fmt->formatCurrency($total, 'USD')}}</td>
+                            <td> {{$fmt->formatCurrency($total, 'HTG')}}</td>
                         </tr>
                         <tr>
                             <td>+</td>
                             <td>
                                 <small>10% fees</small>
-                                <p> {{$fmt->formatCurrency($fee ,'USD')}}</p>
+                                <p> {{$fmt->formatCurrency($fee ,'HTG')}}</p>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td> {{$fmt->formatCurrency($bigTotal, 'USD')}}</td>
+                            <td> {{$fmt->formatCurrency($bigTotal, 'HTG')}}</td>
                         </tr>
                         </tbody>
                     </table>
