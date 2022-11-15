@@ -14,7 +14,7 @@
 </p>
 
 ## 🚧 Preparing translation 🚧
-You will find the complete Haitian kreyòl translation here: [link][en]
+You will find the complete Haitian kreyòl translation here: [link][ht]
 
 ## License
 
