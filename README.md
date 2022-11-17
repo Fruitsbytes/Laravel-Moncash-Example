@@ -24,7 +24,9 @@ Available examples for onsite experience :
 - 🚧 [Basic](./laravel-moncash-onsite-basic-example), CashOut 
 
 ## How to
-You can find a guide on how to make your own implementation from scratch here: [How To](./How%20To/README.md)
+You can find a guide explaining how we consume the MonCash API here: [How To](./How%20To/README.md).
+
+You can use it to make your own implementation from scratch. 
 
 ## Installation
 
@@ -75,6 +77,11 @@ sail artisan migrate
 By default the demo site will be available in http://localhost/
 
 
+## Demo  
+
+### E-commerce website 
+Advance client facing example: [view]() 
+
 <table>
 <tr>
 <td><img src="./assets/images/demo1.jpg?v=1" alt="demo1"></td>
@@ -86,6 +93,8 @@ By default the demo site will be available in http://localhost/
 </tr>
 </table>
 
+### Fund a cause
+Basic  GoFundMe-like example [view]()
 
 ## Usage
 

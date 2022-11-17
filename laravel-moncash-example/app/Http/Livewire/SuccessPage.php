@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Facades\MonCash\API;
+use App\Events\PaymentProcessed;
+use App\Jobs\ProcessMonCashPayment;
 use App\Models\Payment;
 use Exception;
 use Illuminate\Support\Facades\Request;
@@ -11,12 +12,13 @@ use Livewire\Component;
 class SuccessPage extends Component
 {
 
-    /**
-     * @var string
-     */
-    public string $transactionId;
+    public string|null $transactionId;
 
-    public Payment|null $payment;
+    public Payment|null|array $payment;
+
+    public bool $showNewPaymentNotification = false;
+
+    protected $listeners = ["echo:payments,.payment.processed" => 'pong'];
 
 
     public function render()
@@ -28,25 +30,39 @@ class SuccessPage extends Component
 
     public function mount()
     {
+
         $this->transactionId = Request::input('transactionId');
+
         try {
-            $this->payment = Payment::where('transactionID', $this->transactionId)->first();
+            ProcessMonCashPayment::dispatch($this->transactionId);
+        } catch (Exception $e) {
+            session()->flash('error_message', 'Error while processing payment.'.$e->getMessage());
+        }
+
+        session()->put('cart', [
+            "total"        => 0,
+            "items"        => BuyPage::DEFAULT_FRUITS,
+            "number_items" => 0
+        ]);
+    }
+
+    public function loadPayment()
+    {
+
+        try {
+            if ( ! empty($this->transactionId)) {
+                $this->payment = Payment::where('transactionID', '=', $this->transactionId)->first();
+            }
         } catch (Exception $e) {
             $this->payment = null;
         }
     }
 
-    public function loadPayment()
+
+    public function pong()
     {
-        if (empty($this->payment) || $this->payment->message !== 'successful') {
-            try {
-                $payment = API::getTransaction($this->transactionId);
-                if(empty($this->payment)){
-                    $this->payment->update($payment->toUpdateArray());
-                }
-            } catch (Exception $e) {
-                $this->payment = null;
-            }
-        }
+        $this->payment = Payment::where('transactionID', '=', $this->transactionId)->first();
     }
+
+
 }

@@ -133,6 +133,9 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/jetbrains/phpstorm-attributes" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-basic-example/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-basic-example/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-moncash-example/vendor/pusher/pusher-php-server" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

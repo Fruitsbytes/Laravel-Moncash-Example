@@ -1,0 +1,30 @@
+.button-group {
+    @apply shadow rounded-md flex items-center justify-end;
+
+    button {
+        @apply flex items-center text-xs border-y border-gray-800 p-2 px-4 bg-gray-900 relative hover:z-10 text-gray-500 hover:bg-lime-700 hover:text-white hover:border-lime-600 ring-lime-400 hover:ring-2 disabled:hover:bg-gray-600 disabled:hover:cursor-not-allowed  disabled:hover:border-gray-500 disabled:hover:ring-gray-300;
+        svg {
+            @apply w-5 h-5 mr-1 text-gray-400;
+        }
+
+        & + button {
+            @apply border-l;
+        }
+
+        &:first-child {
+            @apply border-l rounded-l-md;
+        }
+
+        &:last-child {
+            @apply border-r rounded-r-md;
+        }
+
+        &.cancel{
+            @apply text-red-700;
+            &:hover{
+                @apply bg-rose-600 ring-red-400 border-red-600 text-white;
+            }
+        }
+    }
+
+}

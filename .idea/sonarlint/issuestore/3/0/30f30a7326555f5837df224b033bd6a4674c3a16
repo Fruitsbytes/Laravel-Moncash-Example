@@ -1,6 +1,0 @@
-
-_php:S103"KSplit this 150 characters long line (which is greater than 120 authorized).(ýÂŽ×
-_php:S103?"KSplit this 147 characters long line (which is greater than 120 authorized).(úÖíÃ
-=php:S108_")Either remove or fill this block of code.(Ëù×Á
-S	php:S1808Ð"=Move this open curly brace to the beginning of the next line.(Ú–õ¬
-`	php:S1808Ð"JPut one space between the closing parenthesis and the opening curly brace.(Ú–õ¬

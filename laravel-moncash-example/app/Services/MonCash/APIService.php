@@ -7,6 +7,7 @@ use App\Facades\MonCash\HTTP;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\Response;
 
 class APIService
 {
@@ -50,52 +51,59 @@ class APIService
      */
     public function getOrder(string $orderId): Payment
     {
-        $reponse = HTTP::postJson(
-            '/v1/RetrieveOrderPayment',
-            json_encode([
-                    "orderId" => $orderId
-                ]
-            )
-        );
-        $reponse->throw();
+        $response = $this->getRawOrder($orderId);
 
+        $response->throw();
+
+        return $this->rawToPayment( $response);
+    }
+
+    /**
+     * @param  string|int  $transactionId
+     *
+     * @return Payment
+     * @throws RequestException
+     */
+    public function getTransaction(string|int $transactionId): Payment
+    {
+        $response = $this->getRawTransaction($transactionId);
+        $response->throw();
+
+        return $this->rawToPayment( $response);
+    }
+
+    public function rawToPayment(Response $response): Payment
+    {
         $payment                = new Payment();
-        $payment->payer         = $reponse['payment']['payer'];
-        $payment->transactionID = $reponse['payment']['transaction_id'];
-        $payment->orderID       = $reponse['payment']['reference'];
-        $payment->cost          = $reponse['payment']['cost'];
-        $payment->message       = $reponse['payment']['message'];
+        $payment->payer         = $response['payment']['payer'];
+        $payment->transactionID = $response['payment']['transaction_id'];
+        $payment->orderID       = $response['payment']['reference'];
+        $payment->cost          = $response['payment']['cost'];
+        $payment->message       = $response['payment']['message'];
 
         return $payment;
     }
 
-    /**
-     * @param  string  $transactionId
-     *
-     * @return Payment
-     * @throws RequestException | ModelNotFoundException<Payment>
-     */
-
-    public function getTransaction(string $transactionId): Payment
+    public function getRawTransaction(string|int $transactionId): Response
     {
-        $reponse = HTTP::postJson(
+        return HTTP::postJson(
             '/v1/RetrieveTransactionPayment',
             json_encode([
                     "transactionId" => $transactionId
                 ]
             )
         );
-        $reponse->throw();
+    }
 
-        $payment                = new Payment();
-        $payment->payer         = $reponse['payment']['payer'];
-        $payment->transactionID = $reponse['payment']['transaction_id'];
-        $payment->orderID       = $reponse['payment']['reference'];
-        $payment->cost          = $reponse['payment']['cost'];
-        $payment->message       = $reponse['payment']['message'];
-
-        return $payment;
-
+    public function getRawOrder(string|int $orderId): Response
+    {
+        return HTTP::postJson(
+            '/v1/RetrieveOrderPayment',
+            json_encode([
+                    "orderId" => $orderId
+                ]
+            )
+        );
     }
 
 }

@@ -2,6 +2,17 @@
 
     $fmt = new NumberFormatter('en_EN', NumberFormatter::CURRENCY);
 
+    $paymentStatusMessage = "The payment was processed. Your order is on its way.";
+
+    if(empty($payment)){
+        $paymentStatusMessage = "Payment not found";
+    }else{
+        if(str_starts_with($payment->message , 'Error: ')){
+             $paymentStatusMessage = "Payment failed.";
+        }else if ($payment->message !== 'successful'){
+             $paymentStatusMessage = "Awaiting payment confirmation.";
+        }
+    }
 @endphp
 
 
@@ -13,7 +24,7 @@
             style="background-color: #102957; background-repeat: no-repeat; background-image: url('{{ asset("img/bg-success.jpg") }}'); background-position: center; background-size: cover "
             class="relative hidden sm:flex flex-col items-center justify-center  flex-grow">
             <img src="{{asset('img/logo.png')}}" class="absolute  block bottom-20  grayscale opacity-5 mx-2"
-                 alt="" style="max-width: 80%">
+                 alt="" style="max-width: 80%" wire:click="pong">
         </div>
         <div class="flex flex-col items-center justify-center p-5">
             <div role="status" class=" absolute top-2 right-2" wire:loading.flex>
@@ -33,12 +44,12 @@
             <h2 class="text-gray-700 text-4xl font-bold mt-4">Payment posted</h2>
 
             <p class="text-gray-400 text-center text-sm">
-                The payment was processed. Your order is on its way.
+                {{$paymentStatusMessage}}
             </p>
 
             <p class="text-mono hover:text-red-600 text-gray-400 cursor-pointer flex items-center">
                 <span>
-                    <span class="text-gray-500">ID:</span> {{ $transactionId  }}
+                    <span class="text-gray-500">ID:</span> {{ $transactionId ?? '??'  }}
                 </span>
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +70,7 @@
                         </svg>
                     </div>
                 @endif
+
                 <div class="flex items-center py-3 border border-gray-700 px-4 my-5 rounded-full">
                     @if($payment->message === 'successful')
                         <div class="rounded-full text-lime-400 bg-lime-800">
@@ -81,9 +93,8 @@
                             </svg>
                         </div>
                         <div class="text-orange-400 pl-4" style="max-width: 300px">
-                            We could not find a valid payment to finalize your purchase. Please
-                            <a href="#" class="text-green-500 underline">Contact us</a>, if you believe there is a
-                            problem.
+                            Awaithing for paymentconfirmation from MonCash. The purchase will be finalized as soon as
+                            teh provider sends the confirmation.
                         </div>
                     @endif
                 </div>
@@ -99,7 +110,22 @@
                     @endforeach
                 </div>
             @else
-                <p>?</p>
+                <div class="flex items-center py-3 border border-gray-700 px-4 my-5 rounded-full">
+{{--                    <div class="rounded-full text-orange-400 bg-orange-800">--}}
+{{--                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"--}}
+{{--                             xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path fill-rule="evenodd"--}}
+{{--                                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"--}}
+{{--                                  clip-rule="evenodd"></path>--}}
+{{--                        </svg>--}}
+{{--                    </div>--}}
+{{--                    <div class="text-orange-400 pl-4" style="max-width: 300px">--}}
+{{--                        Waithing for MonCash. Please--}}
+{{--                        <a href="#" class="text-green-500 underline">Contact us</a>, if you believe there is a--}}
+{{--                        problem.--}}
+{{--                    </div>--}}
+                    🍇🍈🍉🍎🍏🥭🥝
+                </div>
             @endif
 
 
