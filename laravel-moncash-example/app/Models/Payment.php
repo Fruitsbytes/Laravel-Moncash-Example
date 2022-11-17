@@ -60,4 +60,25 @@ class Payment extends Model
             "message"       => $this->message
         ];
     }
+
+    public function merge(Payment $other)
+    {
+
+        $cols = [
+            'orderID',
+            'transactionID',
+            'cost',
+            'payer',
+            'message',
+        ];
+
+        foreach ($cols as $col) {
+            if(isset($other[$col])){
+                $this[$col] = $other[$col];
+            }
+        }
+
+        $this->update();
+
+    }
 }

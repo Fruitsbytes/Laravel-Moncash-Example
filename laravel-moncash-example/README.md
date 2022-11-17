@@ -10,22 +10,55 @@
 
 In this exalpe we simulate an e-commerce website using Laravel and MonCash as a payment system.
 
-In opposition to the [Basic example](../), we use :
+Copy `.env.example` into `.env` and fill the missing environment variables values ( APP_KEY, MONCASH, PUSHER...). 
 
-- [Facades]()
+You should be all set to start :
+```shell
+sail up
+```
+
+```shell
+composer install
+```
+
+In opposition to the [Basic example](../laravel-moncash-basic-example), we use :
+
+- [Facades](https://laravel.com/docs/9.x/facades)
 - [Service Providers](https://laravel.com/docs/9.x/providers)
 - [Containers](https://laravel.com/docs/9.x/container)
 - [Cache](https://laravel.com/docs/9.x/cache)
+- [Queue/Job](https://laravel.com/docs/9.x/queues)
+- [Echo](https://laravel.com/docs/9.x/broadcasting#client-side-installation)
 - Data Persistance with MySQL
-- Environment configuration
+- 🚧 Swap environment configuration in the settings
 - Strategies design patterns
-- i18n Internationalisation
+- 🚧 i18n Internationalisation
     - English
     - French
     - Kreyol
 - Cart + Checkout simulation
 - 🚧 Confirmation Email
 - 🚧 Confirmation SMS
+- 🚧 Cron job to periodically check for missed signal from MonCash
+
+#### ⚠ IMPORTANT:
+
+In this example we use queues to safely  process payment transactions and optimize the server performance.
+
+You will need to select a valid queue connection (default is redis)
+and [run the queue worker](https://laravel.com/docs/9.x/queues#running-the-queue-worker):
+
+```shell
+php artisan queue:work
+```
+
+or
+
+```shell
+sail php artisan queue:work
+```
+
+Also read about process monitoring via [Supervision](https://laravel.com/docs/9.x/queues#supervisor-configuration)
 
 ## Laravel
 

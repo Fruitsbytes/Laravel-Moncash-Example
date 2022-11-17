@@ -25,11 +25,11 @@ class MonCashServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(APIService::class, function () {
-            return new APIService(new HTTP());
+            return new APIService();
         });
 
         $this->app->singleton(AuthService::class, function () {
-            return new AuthService(new HTTP());
+            return new AuthCachedService();
         });
 
         $this->app->bind(OrderIdService::class, function () {

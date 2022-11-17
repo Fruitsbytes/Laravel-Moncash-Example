@@ -2,7 +2,7 @@
 
 namespace App\Services\MonCash;
 
-use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class OrderIdUUIDService extends OrderIdService
 {
@@ -12,6 +12,6 @@ class OrderIdUUIDService extends OrderIdService
      */
     public function getNewId(): string
     {
-        return Uuid::uuid4()->toString();
+        return (string) Str::uuid();
     }
 }

@@ -1,4 +1,5 @@
 # Eksplikasyon
+
 <small>(Biznis an liy)</small>
 
 [en]: ./README.md "English translation"
@@ -24,7 +25,8 @@ Majorite enteraksyon nou pral fè ak API a nou pral sèvi
 ak [Laravel\HTTP Client](https://laravel.com/docs/9.x/http-client) ou ka
 verifye [dokimantasyon](https://laravel.com/docs/9.x/http-client) an pou wè kijan pou sèvi ak li.
 
-Ou ap jwen on egzanp komplè ka ilizasyon senp nan sou-repètwa [laravel-moncash-basic-example](../laravel-moncash-basic-example)
+Ou ap jwen on egzanp komplè ka ilizasyon senp nan
+sou-repètwa [laravel-moncash-basic-example](../laravel-moncash-basic-example)
 
 ## Boutton peye a
 
@@ -231,9 +233,10 @@ class EgzanpAuthService(){
     public function getAccessToken():string
     {
         
-        return  Cache::remember('users', $ttl, function () {
+        return  Cache::remember('token', $ttl, function () {
 
             $response = Http::withBasicAuth($this->clientId, $this->clientSecret)
+                ->asForm()
                 ->post( 
                          HOST_REST_API . '/oauth/token', 
                          [
@@ -269,7 +272,21 @@ Pou ou kreye on payman ou bezwen on nimero refrerans inik, ak prix total la ki s
 Pou nimero inik la ou ka sèvi ak on on UUID (Universally unique identifier). Gen algoritm UUID ki pi efikas ke lot men
 sa pa vle di pap janm gen kolizyon. Risk la fèb et si sata rive API a ta sipoze rejete li, amwnes ke nimero a resikle.
 
-Gen libreri tankou [ramsey/uuid](https://github.com/ramsey/uuid) pou PHP.
+Si ou pa sèvi ak helper function [Illuminate\Support\Str::uuid](https://laravel.com/docs/9.x/helpers#method-str-uuid)
+bay la,
+
+```php
+use Illuminate\Support\Str;
+
+$uuid = Str::uuid()->toString();
+
+//or 
+return (string) Str::uuid();
+
+
+```
+
+gen libreri tankou [ramsey/uuid](https://github.com/ramsey/uuid) pou PHP.
 
 ```php
 use Ramsey\Uuid\Uuid;
@@ -291,18 +308,20 @@ Lè ou fin gen 2 enfomasyon sa yo ou ka kreye on demand pèman sekirize.:
 ```php
 try{
   $auth = new EgzanpAuthService(); // Si nou sèvi ak egzanp anwo a pou jwenn token lan
-  $access_token  = $auth->getAccessToken();
-  $orderId = Uuid::uuid4()->toString();
+  $accessToken  = $auth->getAccessToken();
+  $orderId = (string) Str::uuid();
   $amount= ceil(45.50); // 46 -> awondi li anwo pou biznis la pa fe defisi, ou ka fe li passe kom frè
   
-  $response = Http::withToken($access_token)->postRaw(
-    HOST_REST_API . '/v1/CreatePayment',
-    '{"amount": ' . $amount .',"orderId": "'. $orderId .'"}'
-  );
+  $response = Http::withToken($accessToken)
+                        ->withBody(
+                            '{"amount": '.$amount.',"orderId": "'.$orderId.'"}',
+                            'application/json'
+                        )->post(HOST_REST_API.'/v1/CreatePayment');
   
   $response->throw();
   
   $payment_token = $response['payment_token']['token'];
+  
   
 }catch(Exception $e){
     //...
@@ -456,12 +475,13 @@ Ou ka fè li na Controller Route la oswa nan Component la.
 use Illuminate\Support\Facades\Request;
 
 $transactionId = Request::input('transactionId'); // 2185774546
-
-$reponse =  Http::withToken($access_token)
-                  ->postRaw(
-                            HOST_REST_API . '/v1/RetrieveTransactionPayment',
-                            '{"transactionId": "' . $transactionId .'"}'
-                           );
+                           
+ $response = Http::withToken($accessToken)
+                        ->withBody(
+                           '{"transactionId": "' . $transactionId .'"}',
+                            'application/json'
+                        )->post(HOST_REST_API . '/v1/RetrieveTransactionPayment');
+                        
                            
 $is_success = $reponse['payment']['message'] === 'successful';
 
@@ -475,7 +495,7 @@ if($is_success){
 }
 ```
 
-Nan egzanp saa nou tou rale user a si nou te asoye li. Li sipoze ke nou te asoye Payment la ak on user. Ou ka konsilte
+Nan egzanp saa nou tou rale user a si nou te asosye li. Li sipoze ke nou te asoye Payment la ak on user. Ou ka konsilte
 dokimantsyon sou [Laravel Eloquent Relations](https://laravel.com/docs/9.x/eloquent-relationships) pou plis enfòmasyon.
 
 Egzanp rezilta:
