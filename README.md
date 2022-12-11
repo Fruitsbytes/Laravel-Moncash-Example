@@ -80,7 +80,7 @@ By default the demo site will be available in http://localhost/
 ## Demo  
 
 ### E-commerce website 
-Advance client facing example: [view]() 
+Advance client facing example: [view](./laravel-moncash-example) 
 
 <table>
 <tr>
@@ -94,7 +94,7 @@ Advance client facing example: [view]()
 </table>
 
 ### Fund a cause
-Basic  GoFundMe-like example [view]()
+Basic  GoFundMe-like example [view](./laravel-moncash-basic-example)
 
 <table>
 <tr>
@@ -104,6 +104,18 @@ Basic  GoFundMe-like example [view]()
 <tr>
 <td><img src="./assets/images/basic-3.jpg?v=2" alt="demo-basic"></td>
 <td><img src="./assets/images/basic-4.jpg?v=2" alt="demo-basic"></td>
+</tr>
+</table>
+
+### Order an Item  
+
+Example uan external libraty, [FruitsBytes/PHP-MonCash](https://github.com/Fruitsbytes/php-moncash)
+
+[view](./laravel-moncash-php-moncash)
+
+<table>
+<tr>
+<td><img src="./assets/images/phpmoncash.jpg?v=3" alt="demo-php-moncash"></td>
 </tr>
 </table>
 
