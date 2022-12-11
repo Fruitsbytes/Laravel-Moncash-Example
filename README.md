@@ -96,6 +96,18 @@ Advance client facing example: [view]()
 ### Fund a cause
 Basic  GoFundMe-like example [view]()
 
+<table>
+<tr>
+<td><img src="./assets/images/basic-1.jpg?v=2" alt="demo-basic"></td>
+<td><img src="./assets/images/basic-2.jpg?v=2" alt="demo-basic"></td>
+</tr>
+<tr>
+<td><img src="./assets/images/basic-3.jpg?v=2" alt="demo-basic"></td>
+<td><img src="./assets/images/basic-4.jpg?v=2" alt="demo-basic"></td>
+</tr>
+</table>
+
+
 ## Usage
 
 Add products to the cart from the product list. In the cart, use MonCash as a payment method. You can check the status
